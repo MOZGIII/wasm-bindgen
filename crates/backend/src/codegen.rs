@@ -1267,9 +1267,9 @@ impl TryToTokens for ast::ImportFunction {
                         ).await
                     };
                     convert_ret = if self.catch {
-                        quote! { Ok(#future?) }
+                        quote! { Ok(#future?.into()) }
                     } else {
-                        quote! { #future.expect("unexpected exception") }
+                        quote! { #future.expect("unexpected exception").into() }
                     };
                 } else {
                     abi_ret = quote! {
